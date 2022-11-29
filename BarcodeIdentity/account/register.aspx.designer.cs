@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BarcodeIdentity
+namespace BarcodeIdentity.account
 {
 
 
-    public partial class _default
+    public partial class register
     {
 
         /// <summary>

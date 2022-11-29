@@ -1,0 +1,322 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="barcode.master.cs" Inherits="BarcodeIdentity.account.barcode" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="/css/themify-icons.css">
+    <link rel="stylesheet" href="/css/feather.css">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="/css/style.css"> 
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="color-theme-blue mont-font">
+    <div class="preloader"></div>
+    <form id="form1" runat="server">
+ <div class="main-wrapper">
+
+        <!-- navigation top-->
+        <div class="nav-header bg-white shadow-xs border-0">
+            <div class="nav-top">
+                <a href="/"><i class="feather-grid text-success display1-size me-2 ms-0"></i><span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">BarcodeID. </span> </a>
+                <a href="/home" class="mob-menu ms-auto me-2"><i class="feather-home text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
+                <a href="#" class="mob-menu me-2" data-bs-toggle="modal" data-bs-target="#Modalregister"><i class="feather-zap text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
+                <a href="#" class="me-2 menu-search-icon mob-menu"><i class="feather-search text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
+                <button type="button" class="nav-menu me-0 ms-2"></button>
+            </div>
+            
+            <div action="#" class="float-left header-search">
+                <div class="form-group mb-0 icon-input">
+                    <i class="feather-search font-sm text-grey-400"></i>
+                    <input type="text" placeholder="Start typing to search.." class="bg-grey border-0 lh-32 pt-2 pb-2 ps-5 pe-3 font-xssss fw-500 rounded-xl w350 theme-dark-bg">
+                </div>
+            </div>
+            <a href="/home" class="p-2 text-center ms-3 menu-icon center-menu-icon"><i class="feather-home font-lg alert-primary btn-round-lg theme-dark-bg text-current "></i></a>
+            <a href="#" class="p-2 text-center ms-0 menu-icon center-menu-icon" data-bs-toggle="modal" data-bs-target="#Modalregister"><i class="feather-zap font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500 "></i></a>
+            <a href="/members" class="p-2 text-center ms-0 menu-icon center-menu-icon"><i class="feather-users font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500 "></i></a>
+            <a href="/shop" class="p-2 text-center ms-0 menu-icon center-menu-icon"><i class="feather-shopping-bag font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500 "></i></a>
+
+            <a href="#" class="p-2 text-center ms-auto menu-icon" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown"><img src="/images/profile-4.png" alt="users" class="w40 mt--1"></a>
+            <div class="dropdown-menu dropdown-menu-end p-4 rounded-3 border-0 shadow-lg" aria-labelledby="dropdownMenu3">
+               
+                <div class="card bg-transparent-card w-100 border-0 ps-5 mb-3">
+                    <a href="/account/profile"><h5 class="font-xsss text-grey-900 mb-1 mt-0 fw-700 d-block">Edit Profile<span class="text-grey-400 font-xsssss fw-600 float-right mt-1"></span></h5></a>
+                </div>
+                 <div class="card bg-transparent-card w-100 border-0 ps-5 mb-3">
+                    <a href="/account/login"><h5 class="font-xsss text-grey-900 mb-1 mt-0 fw-700 d-block">Logout</h5></a>
+                </div>
+
+                
+            </div>
+            <a href="#" class="p-2 text-center ms-3 menu-icon chat-active-btn"><i class="feather-settings font-xl text-current"></i></a>
+         
+
+            
+        </div>
+        <!-- navigation top -->
+
+        <!-- navigation left -->
+        <nav class="navigation scroll-bar">
+            <div class="container ps-0 pe-0">
+                <div class="nav-content">
+                    <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1 mb-2 mt-2">
+                        <div class="nav-caption fw-600 font-xssss text-grey-500"><span>Main </span>Feed</div>
+                        <ul class="mb-1 top-content">
+                            <li class="logo d-none d-xl-block d-lg-block"></li>
+                                     
+
+                            <li><a href="/home" class="nav-content-bttn open-font"><i class="feather-home font-lg alert-primary btn-round-lg theme-dark-bg text-current me-3"></i><span>Home</span></a></li>
+                            <li><a href="#" class="nav-content-bttn open-font" data-bs-toggle="modal" data-bs-target="#Modalregister"><i class="feather-zap btn-round-md bg-red-gradiant me-3"></i><span>Quick Create</span></a></li>
+                            <li><a href="/home/barcodetemplate" class="nav-content-bttn open-font" ><i class="feather-grid btn-round-md bg-gold-gradiant me-3"></i><span>BarCode Template</span></a></li>
+                            <li><a href="/members" class="nav-content-bttn open-font"><i class="feather-users btn-round-md bg-primary-gradiant me-3"></i><span>Members</span></a></li>                        
+                        </ul>
+                    </div>
+
+                    <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1 mb-2">
+                        <div class="nav-caption fw-600 font-xssss text-grey-500"><span>Reporting</span></div>
+                        <ul class="mb-3">
+                                                        <li><a href="/home/reports" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i class="font-sm feather-pie-chart me-3 text-grey-500"></i><span>Analytics</span></a>
+                        </ul>
+                    </div>
+                    <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1">
+                        <div class="nav-caption fw-600 font-xssss text-grey-500"><span></span> Account</div>
+                        <ul class="mb-1">
+                            <li class="logo d-none d-xl-block d-lg-block"></li>
+                            <li><a href="/account/settings" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i class="font-sm feather-settings me-3 text-grey-500"></i><span>Settings</span></a></li>
+                            <li><a href="#" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i class="font-sm feather-message-square me-3 text-grey-500"></i><span>Chat</span><%--<span class="circle-count bg-warning mt-0">23</span>--%></a></li>
+                             <li><a href="/account/login" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i class="font-sm feather-log-out me-3 text-grey-500"></i><span>Logout</span><%--<span class="circle-count bg-warning mt-0">23</span>--%></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- navigation left -->
+              
+
+
+       
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+     <div class="alert alert-danger" role="alert" id="exceptiondiv" runat="server" visible="false">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button><span id="exceptiontxt" runat="server"></span>
+                                </div>
+      <!-- right chat -->
+        <div class="right-chat nav-wrap mt-2 right-scroll-bar">
+            <div class="middle-sidebar-right-content bg-white shadow-xss rounded-xxl">
+
+                <!-- loader wrapper -->
+                <div class="preloader-wrap p-3">
+                    <div class="box shimmer">
+                        <div class="lines">
+                            <div class="line s_shimmer"></div>
+                            <div class="line s_shimmer"></div>
+                            <div class="line s_shimmer"></div>
+                            <div class="line s_shimmer"></div>
+                        </div>
+                    </div>
+                    <div class="box shimmer mb-3">
+                        <div class="lines">
+                            <div class="line s_shimmer"></div>
+                            <div class="line s_shimmer"></div>
+                            <div class="line s_shimmer"></div>
+                            <div class="line s_shimmer"></div>
+                        </div>
+                    </div>
+                    <div class="box shimmer">
+                        <div class="lines">
+                            <div class="line s_shimmer"></div>
+                            <div class="line s_shimmer"></div>
+                            <div class="line s_shimmer"></div>
+                            <div class="line s_shimmer"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- loader wrapper -->
+                 
+                <div class="section full pe-3 ps-4 pt-4 position-relative feed-body">
+                    <h4 class="font-xsssss text-grey-500 text-uppercase fw-700 ls-3">FEATURED MEMBERS</h4>
+                    <ul class="list-group list-group-flush">
+                        <asp:Repeater ID="Repeater1" runat="server">
+                                        <ItemTemplate>
+                        <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
+                            <figure class="avatar float-left mb-0 me-2">
+                                <img src="/images/rounddefault.jpg" alt="image" class="w35">
+                            </figure>
+                            <h3 class="fw-700 mb-0 mt-0">
+                                <a class="font-xssss text-grey-600 d-block text-dark" href="member_profile?mid=<%# Eval("MemberId") %>"><%# Eval("FirstName") %> <%# Eval("LastName") %> </a>
+                            </h3>
+                            <span class="bg-success ms-auto btn-round-xss"></span>
+                        </li>
+                        </ItemTemplate>
+                            </asp:Repeater>
+                        
+                   
+                    </ul>
+                </div>
+              
+
+            </div>
+        </div>
+
+        
+        <!-- right chat -->
+        
+        <div class="app-footer border-0 shadow-lg bg-primary-gradiant">
+            <a href="default.html" class="nav-content-bttn nav-center"><i class="feather-home"></i></a>
+            <a href="default-video.html" class="nav-content-bttn"><i class="feather-package"></i></a>
+            <a href="default-live-stream.html" class="nav-content-bttn" data-tab="chats"><i class="feather-layout"></i></a>            
+            <a href="shop-2.html" class="nav-content-bttn"><i class="feather-layers"></i></a>
+            <a href="account/settings" class="nav-content-bttn"><img src="/images/female-profile.png" alt="user" class="w30 shadow-xss"></a>
+        </div>
+
+        <div class="app-header-search">
+            <div class="search-form">
+                <div class="form-group searchbox mb-0 border-0 p-1">
+                    <input type="text" class="form-control border-0" placeholder="Search...">
+                    <i class="input-icon">
+                        <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
+                    </i>
+                    <a href="#" class="ms-1 mt-1 d-inline-block close searchbox-close">
+                        <i class="ti-close font-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div> 
+         <div class="modal bottom side fade" id="Modalstries" tabindex="-1" role="dialog" style=" overflow-y: auto;">
+         <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0 bg-transparent">
+                <button type="button" class="close mt-0 position-absolute top--30 right--10" data-dismiss="modal" aria-label="Close"><i class="ti-close text-white font-xssss"></i></button>
+                <div class="modal-body p-0">
+                    <div class="card w-100 border-0 rounded-3 overflow-hidden bg-gradiant-bottom bg-gradiant-top">
+                        <div class="owl-carousel owl-theme dot-style3 story-slider owl-dot-nav nav-none">
+                            <div class="item"><img src="/images/story-5.jpg" alt="image"></div>
+                            <div class="item"><img src="/images/story-6.jpg" alt="image"></div>
+                            <div class="item"><img src="/images/story-7.jpg" alt="image"></div>
+                            <div class="item"><img src="/images/story-8.jpg" alt="image"></div>
+                            
+                        </div>
+                    </div>
+                    <div class="form-group mt-3 mb-0 p-3 position-absolute bottom-0 z-index-1 w-100">
+                        <input type="text" class="style2-input w-100 bg-transparent border-light-md p-3 pe-5 font-xssss fw-500 text-white" value="Write Comments">               
+                        <span class="feather-send text-white font-md text-white position-absolute" style="bottom: 35px;right:30px;"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-popup-chat">
+        <div class="modal-popup-wrap bg-white p-0 shadow-lg rounded-3">
+            <div class="modal-popup-header w-100 border-bottom">
+                <div class="card p-3 d-block border-0 d-block">
+                    <figure class="avatar mb-0 float-left me-2">
+                        <img src="/images/user-12.png" alt="image" class="w35 me-1">
+                    </figure>
+                    <h5 class="fw-700 text-primary font-xssss mt-1 mb-1">Hendrix Stamp</h5>
+                    <h4 class="text-grey-500 font-xsssss mt-0 mb-0"><span class="d-inline-block bg-success btn-round-xss m-0"></span> Available</h4>
+                    <a href="#" class="font-xssss position-absolute right-0 top-0 mt-3 me-4"><i class="ti-close text-grey-900 mt-2 d-inline-block"></i></a>
+                </div>
+            </div>
+            <div class="modal-popup-body w-100 p-3 h-auto">
+                <div class="message"><div class="message-content font-xssss lh-24 fw-500">Hi, how can I help you?</div></div>
+                <div class="date-break font-xsssss lh-24 fw-500 text-grey-500 mt-2 mb-2">Mon 10:20am</div>
+                <div class="message self text-right mt-2"><div class="message-content font-xssss lh-24 fw-500">I want those files for you. I want you to send 1 PDF and 1 image file.</div></div>
+                <div class="snippet pt-3 ps-4 pb-2 pe-3 mt-2 bg-grey rounded-xl float-right" data-title=".dot-typing"><div class="stage"><div class="dot-typing"></div></div></div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-popup-footer w-100 border-top">
+                <div class="card p-3 d-block border-0 d-block">
+                    <div class="form-group icon-right-input style1-input mb-0"><input type="text" placeholder="Start typing.." class="form-control rounded-xl bg-greylight border-0 font-xssss fw-500 ps-3"><i class="feather-send text-grey-500 font-md"></i></div>
+                </div>
+            </div>
+        </div> 
+    </div>
+
+            <div class="modal bottom fade" style="overflow-y: scroll;" id="Modalregister" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="ti-close text-grey-500"></i></button>
+                <div class="modal-body p-3 d-flex align-items-center bg-none">
+                    <div class="card shadow-none rounded-0 w-100 p-2 pt-3 border-0">
+                        <div class="card-body rounded-0 text-left p-3">
+                            <h6 class="fw-700 display1-size display2-md-size mb-4">Create  New Member</h6>                        
+                            <div>
+                                
+                                <div class="form-group icon-input mb-3">
+                                    <i class="font-sm ti-user text-grey-500 pe-0"></i>
+                                    <input type="text" id="firstnametxt" runat="server" class="style2-input ps-5 form-control text-grey-900 font-xsss fw-600" placeholder="Member First Name">                        
+                                </div>
+                                <div class="form-group icon-input mb-3">
+                                    <i class="font-sm ti-user text-grey-500 pe-0"></i>
+                                    <input type="text" id="lastnametxt" runat="server" class="style2-input ps-5 form-control text-grey-900 font-xsss fw-600" placeholder="Member Last Name">                        
+                                </div>
+                                <div class="form-group icon-input mb-3">
+                                    <i class="font-sm ti-email text-grey-500 pe-0"></i>
+                                    <input type="email"  id="emailaddtxt" runat="server" class="style2-input ps-5 form-control text-grey-900 font-xsss fw-600" placeholder="Member Email Address">                        
+                                </div>
+                                <div class="form-group icon-input mb-3">
+                                    <input type="text"  id="phonetxt" runat="server" class="style2-input ps-5 form-control text-grey-900 font-xss ls-3" placeholder="Phone Number">
+                                    <i class="font-sm ti-phone text-grey-500 pe-0"></i>
+                                </div>
+                                <div class="form-group icon-input mb-1">
+                                    <input type="text"  id="nicknametxt" runat="server" class="style2-input ps-5 form-control text-grey-900 font-xss ls-3" placeholder="Nick Name">
+                                    <i class="font-sm ti-phone text-grey-500 pe-0"></i>
+                                </div>
+                
+                            </div>
+                             
+                            <div class="col-sm-12 p-0 text-left">
+                                <asp:Button ID="Button1" class="form-control text-center style2-input text-white fw-600 bg-dark border-0 p-0" OnClick="add_member_clk" runat="server" Text="Create" />
+                            </div>
+                        
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+         <div class="modal bottom fade" style="overflow-y: scroll;" id="uploadmodal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="ti-close text-grey-500"></i></button>
+                <div class="modal-body p-3 d-flex align-items-center bg-none">
+                    <div class="card shadow-none rounded-0 w-100 p-2 pt-3 border-0">
+                        <div class="card-body rounded-0 text-left p-3">
+                            <h6 class="fw-500 display1-size display2-md-size mb-4">Upload Members</h6>                        
+                            <div>
+                                
+                                <div class="form-group icon-input mb-3">
+                                    <asp:FileUpload ID="FileUpload2" class="form-control" runat="server" />
+                                </div>          
+                            </div>
+                             
+                            <div class="row">
+                            <div class="col-sm-6 col-md-6 p-0 text-left">
+                                <asp:Button ID="Button2" class="form-control text-center style2-input text-white fw-600 bg-primary border-0 p-0" OnClick="download_temp" runat="server" Text="Download Template" />
+                            </div>
+                            <div class="col-sm-5 col-md-5 p-0 text-left" style="margin-left:5px">
+                                 <asp:Button ID="Button3" class="form-control text-center style2-input text-white fw-600 bg-success border-0 p-0" OnClick="add_member_clk" runat="server" Text="Upload" />
+                            </div>
+                        </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </form>
+     <script src="/js/plugin.js"></script>
+    <script src="/js/scripts.js"></script>
+
+</body>
+</html>
