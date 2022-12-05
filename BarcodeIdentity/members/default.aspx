@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/account/barcode.Master" AutoEventWireup="true" MaintainScrollPositionOnPostback="true" CodeBehind="default.aspx.cs" Inherits="BarcodeIdentity.users.members" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-        <title>BarcodID - Personal ID Suite</title>
+        <title>QrId - Personal ID Suite</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <!-- main content -->
