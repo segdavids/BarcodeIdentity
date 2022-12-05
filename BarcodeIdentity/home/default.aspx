@@ -8,6 +8,10 @@
             
             <div class="middle-sidebar-bottom">
                 <div class="middle-sidebar-left">
+                    <!-- ALERT -->
+                              <div class="alert alert-danger" role="alert" id="exceptiondiv" runat="server" visible="false">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button><span id="exceptiontxt" runat="server"></span>
+                                </div>
                     <div class="row">
                         <div class="col-xl-12 ">
                             <div class="row">
@@ -28,38 +32,42 @@
                                         </div>
                                     </div>  
                                 </div>
+                                <asp:Repeater ID="Repeater1" runat="server">
+                                        <ItemTemplate>
                                 <div class="col-lg-3 pe-2">
                                     <div class="card w-100 border-0 shadow-none p-4 rounded-xxl mb-3" style="background-color: #e5f6ff;">
                                         <div class="card-body d-flex p-0">
-                                            <i class="btn-round-lg d-inline-block me-3 bg-primary-gradiant feather-home font-md text-white"></i>
-                                            <h4 class="text-primary font-xl fw-700">2.3M <span class="fw-500 mt-0 d-block text-grey-500 font-xssss">QRIDs</span></h4>
+                                            <i class="btn-round-lg d-inline-block me-3 bg-primary-gradiant feather-grid font-md text-white"></i>
+                                            <h4 class="text-primary font-xl fw-700"><%# Eval("qrids") %><span class="fw-500 mt-0 d-block text-grey-500 font-xssss">QRIDs</span></h4>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 pe-2 ps-2">
                                     <div class="card w-100 border-0 shadow-none p-4 rounded-xxl mb-3" style="background-color: #f6f3ff;">
                                         <div class="card-body d-flex p-0">
-                                            <i class="btn-round-lg d-inline-block me-3 bg-secondary feather-lock font-md text-white"></i>
-                                            <h4 class="text-secondary font-xl fw-700">44.6K <span class="fw-500 mt-0 d-block text-grey-500 font-xssss">Total Members</span></h4>
+                                            <i class="btn-round-lg d-inline-block me-3 bg-secondary feather-users font-md text-white"></i>
+                                            <h4 class="text-secondary font-xl fw-700"><%# Eval("qrids") %> <span class="fw-500 mt-0 d-block text-grey-500 font-xssss">Total Members</span></h4>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 pe-2 ps-2">
                                     <div class="card w-100 border-0 shadow-none p-4 rounded-xxl mb-3" style="background-color: #e2f6e9;">
                                         <div class="card-body d-flex p-0">
-                                            <i class="btn-round-lg d-inline-block me-3 bg-success feather-command font-md text-white"></i>
-                                            <h4 class="text-success font-xl fw-700">603 <span class="fw-500 mt-0 d-block text-grey-500 font-xssss">Active Members</span></h4>
+                                            <i class="btn-round-lg d-inline-block me-3 bg-success feather-user font-md text-white"></i>
+                                            <h4 class="text-success font-xl fw-700"><%# Eval("active") %> <span class="fw-500 mt-0 d-block text-grey-500 font-xssss">Active Members</span></h4>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 ps-2">
                                     <div class="card w-100 border-0 shadow-none p-4 rounded-xxl mb-3" style="background-color: #fff0e9;">
                                         <div class="card-body d-flex p-0">
-                                            <i class="btn-round-lg d-inline-block me-3 bg-warning feather-shopping-bag font-md text-white"></i>
-                                            <h4 class="text-warning font-xl fw-700">3M <span class="fw-500 mt-0 d-block text-grey-500 font-xssss">Inactive Members</span></h4>
+                                            <i class="btn-round-lg d-inline-block me-3 bg-danger feather-user font-md text-white"></i>
+                                            <h4 class="text-danger font-xl fw-700"><%# Eval("inactive") %> <span class="fw-500 mt-0 d-block text-grey-500 font-xssss">Inactive Members</span></h4>
                                         </div>
                                     </div>
                                 </div>
+                                            </ItemTemplate>
+                                    </asp:Repeater>
                                 <div class="col-lg-12">
                                     <div class="card w-100 p-3 border-0 mb-3 rounded-xxl bg-lightblue2 shadow-none overflow-hidden">
                                         <div id="chart-usersMultiplee"></div>

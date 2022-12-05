@@ -1,11 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/account/barcode.Master" AutoEventWireup="true" MaintainScrollPositionOnPostback="true" CodeBehind="edit_profile.aspx.cs" Inherits="BarcodeIdentity.members.edit_profile" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <title>BarcodID - Personal ID Suite - Edit Profile</title>
+    <title>QrId - Personal ID Suite - Edit Profile</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
       <!-- main content -->
-        <div class="main-content right-chat-active">
-            
+        <div class="main-content right-chat-active">        
             <div class="middle-sidebar-bottom">
                 <div class="middle-sidebar-left">
                     <!-- ALERT -->

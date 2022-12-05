@@ -1,10 +1,14 @@
 ﻿using BarcodeIdentity.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace BarcodeIdentity.members
@@ -39,6 +43,8 @@ namespace BarcodeIdentity.members
         {
             try
             {
+                string url = Guid.NewGuid().ToString();
+                string password = Guid.NewGuid().ToString();
                 string firstname = firstnametxt.Value;
                 string lastname = lastnametxt.Value;
                 string phone = phonetxt.Value;
@@ -49,7 +55,10 @@ namespace BarcodeIdentity.members
                 string active = "1";
                 string dob = dobtxt.Value;
                 string about = abouttxt.Value;
-                string update = $"Insert into Users (FirstName,LastName,Email,Phone,NickName,CountryId,StateId,DOB,Active,About) values('{firstname}','{lastname}','{email}','{phone}','{nickname}','{country}','{state}','{dob}','{active}','{about}')";
+                //Bitmap bmpp = BLL.GenerateQR(ConfigurationManager.AppSettings["domainurl"] +"/view/"+ url);
+                //var imagery = Convert.ToBase64String(BLL.BitmapToBytes(bmpp));
+                //qr.Save($"~/qrcodes/{qr}");
+                string update = $"Insert into Users (MemberUniqueId,FirstName,LastName,Email,Password,Phone,NickName,CountryId,StateId,DOB,Active,About) values('{url}','{firstname}','{lastname}','{email}','{password}','{phone}','{nickname}','{country}','{state}','{dob}','{active}','{about}')";
                 string resp = BLL.NonQeryRequest(update);
                 switch (resp)
                 {

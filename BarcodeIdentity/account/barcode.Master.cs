@@ -14,6 +14,12 @@ using System.Windows.Controls;
 using System.Configuration;
 using LumenWorks.Framework.IO.Csv;
 using Antlr.Runtime.Misc;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Web.UI.HtmlControls;
+using static System.Net.Mime.MediaTypeNames;
+using System.Web.Profile;
+using Label = System.Web.UI.WebControls.Label;
 
 namespace BarcodeIdentity.account
 {
@@ -24,6 +30,7 @@ namespace BarcodeIdentity.account
         {
             public string FirstName { get; set; }
             public string LastName { get; set; }
+            public string MemberUniqueId { get; set; }
             public string DOB { get; set; }
             public string Email { get; set; }
             public string NickName { get; set; }
@@ -33,13 +40,62 @@ namespace BarcodeIdentity.account
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            featuredmemeber();
+            if (Session["Email"] == null || Session["AdminId"] == null)
+            {
+                Response.Redirect("~/account/login?url=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+            }
+            else
+            {
+                featuredmemeber();
+            }
+            
         }
 
         protected void add_member_clk(object sender, EventArgs e)
         {
+            try
+            {
+                string url = Guid.NewGuid().ToString();
+                string password = Guid.NewGuid().ToString();
+                string firstname = firstnametxt.Value;
+                string lastname = lastnametxt.Value;
+                string phone = phonetxt.Value;
+                string email = emailaddtxt.Value;
+                string nickname = nicknametxt.Value;
+                string active = "1";
+                //Bitmap qr = BLL.GenerateQR(url);
+                //img.jpg", ImageFormat.Jpeg
+                //qr.Save("img.jpg", ImageFormat.Jpeg);
+                string update = $"Insert into Users (MemberUniqueId,FirstName,LastName,Email,Password,Phone,NickName,Active) values('{url}','{firstname}','{lastname}','{email}','{password}','{phone}','{nickname}','{active}')";
+                string resp = BLL.NonQeryRequest(update);
+                switch (resp)
+                {
+                    case "200":
+                        exceptiondiv.Visible = true;
+                        exceptiondiv.Attributes.Add("class", "alert alert-success");
+                        exceptiontxt.InnerText = "Member profile added successfully";
+                        break;
+                    case "400":
+                        exceptiondiv.Visible = true;
+                        exceptiontxt.InnerText = "Member profile could not be added: no changes made";
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch(Exception ex)
+            {
+                exceptiondiv.Visible = true;
+                exceptiontxt.InnerHtml = ex.ToString();
+            }
+        }
+
+        protected void upload_member_clk (object sender, EventArgs e)
+        {
             DataTable dt = new DataTable();
-            dt.Columns.AddRange(new DataColumn[7] { new DataColumn("FirstName", typeof(string)),
+            dt.Columns.AddRange(new DataColumn[8] {
+                        new DataColumn("MemberUniqueId", typeof(string)),
+                        new DataColumn("FirstName", typeof(string)),
                         new DataColumn("LastName", typeof(string)),
                         new DataColumn("DOB", typeof(string)),
                         new DataColumn("Email", typeof(string)),
@@ -49,6 +105,7 @@ namespace BarcodeIdentity.account
                         //new DataColumn("State", typeof(string)),
 
                 });
+            string memberuniqueId = string.Empty;
             try
             {
                 int count = 0;
@@ -77,23 +134,24 @@ namespace BarcodeIdentity.account
                             List<uploadparams> searchParameters = new List<uploadparams>();
                             for (int i = 0; i < csvTable.Rows.Count; i++)
                             {
+                                 memberuniqueId = new Guid().ToString();
 
-                                searchParameters.Add(new uploadparams { FirstName = csvTable.Rows[i][0].ToString(), LastName = csvTable.Rows[i][1].ToString(), DOB = (csvTable.Rows[i][2].ToString()), Email = csvTable.Rows[i][3].ToString(), NickName = csvTable.Rows[i][4].ToString(), Phone = csvTable.Rows[i][5].ToString(), About = csvTable.Rows[i][6].ToString() });
+                                searchParameters.Add(new uploadparams { MemberUniqueId=memberuniqueId, FirstName = csvTable.Rows[i][0].ToString(), LastName = csvTable.Rows[i][1].ToString(), DOB = (csvTable.Rows[i][2].ToString()), Email = csvTable.Rows[i][3].ToString(), NickName = csvTable.Rows[i][4].ToString(), Phone = csvTable.Rows[i][5].ToString(), About = csvTable.Rows[i][6].ToString() });
                             }
                             foreach (DataRow row in csvTable.Rows) // FOR EACH ROW IN CSV
                             {
 
                                 string firstname = row["FirstName"].ToString(); //FOR EACH COORDINATE
                                 string lastname = row["LastName"].ToString(); //FOR EACH COORDINATE
+                                string password = new Guid().ToString();
                                 string email = row["Email"].ToString();
                                 string dob = row["DOB"].ToString();
                                 string about = row["About"].ToString();
                                 string nickname = row["NickName"].ToString();
                                 string phone = row["Phone"].ToString();
-
                                 DateTime created = DateTime.Now;
                                 int activated = 1;
-                                string update = $"Insert into Users (FirstName,LastName,Email,Phone,NickName,DOB,Active,About, DateCreated) values('{firstname}','{lastname}','{email}','{phone}','{nickname}','{dob}','{activated}','{about}','{created}')";
+                                string update = $"Insert into Users (MemberUniqueId,FirstName,LastName,Email,Password,Phone,NickName,DOB,Active,About, DateCreated) values('{memberuniqueId}','{firstname}','{lastname}','{email}','{password}','{phone}','{nickname}','{dob}','{activated}','{about}','{created}')";
                                 string resp = BLL.NonQeryRequest(update);
                                 switch (resp)
                                 {
@@ -125,7 +183,7 @@ namespace BarcodeIdentity.account
 
         public void featuredmemeber()
         {
-            Repeater1.DataSource = BLL.GetRequest("select top 5 * from Users where Active=1 order by NEWID()");
+            Repeater1.DataSource = BLL.GetRequest("select top 5 * from Users order by NEWID()");
             Repeater1.DataBind();
         }
 
@@ -137,6 +195,34 @@ namespace BarcodeIdentity.account
             Response.AppendHeader("Content-Disposition", "attachment; filename=" + doctype);
             Response.WriteFile(filePath);
             Response.End();
+        }
+
+        protected void Repeater1_ItemCreated(object sender, RepeaterItemEventArgs e)
+        {
+            bool status;
+            if ((e.Item.ItemType == ListItemType.Item) || (e.Item.ItemType == ListItemType.AlternatingItem))
+            {
+                RepeaterItem item = e.Item;
+
+                //  DataRow dr = (item.DataItem as DataRowView).Row;
+                DataRowView drView = e.Item.DataItem as DataRowView;
+                if (drView != null)
+                {
+                     status = Convert.ToBoolean(drView["Active"].ToString());
+                    switch (status)
+                    {
+                        case true:
+                            (item.FindControl("activelabel") as Label).Visible = true;
+                            break;
+                        case false:
+                            (item.FindControl("inactivelabel") as Label).Visible = true;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
         }
     }
 }
